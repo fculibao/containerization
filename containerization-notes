@@ -1,0 +1,103 @@
+INSTALL TOOLS REQUIRED IN THIS PROJECT :
+          - docker
+          - vagrant
+          - git
+          - 
+
+
+
+1. Create docker file forr thge following
+a. APP [TOMACAT] - in this dirctory wee should have the application war file.
+b. DB  [MYSQL] - in this directory we should have the db_backup.sql file
+c. WEB [NGINX] - in this directory we shoule have the nginx.conf file in this demo is  nginxproapp.conf
+
+2. Enable to build and test out application containere we need the artifact with the right application properties
+A. In the main directory or in the directory source code where we are running our docker service we need to clone our working application repository
+          - in this demo we are using https://github.com/devopshydclub/vprofile-project.git
+          - cd to the main directoory project
+          - git clone https://github.com/devopshydclub/vprofile-project.git
+          NEW REPO: git clone https://github.com/fculibao/m2lab.git
+          - In the source code directory wher we havee our pom.xml file we need to have MAVEN and for maven we need JDK
+                    so first we need to install JDK (openjdk-11-jdk) 
+                    - on ubuntu:
+                              # sudo apt install openjdk-8-jdk -y && sudo apt install maven -y 
+          - run # mvn install
+
+B. After that we need to build our ARTIFACT, but before that we need to fill the details on our backend services. So application container can connect to backend services DB MemChache RabbitMQ.
+          - so in directory src/main/resources, w have application.properties file. 
+          - So we ned to make suree backnd services name matches our container
+#JDBC Configutation for Database Connection
+jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://vprodb:3306/accounts?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull # make sure we launch our container with this name "vproodb" exposed on port "3306" and db "accounts"
+jdbc.username=root           
+jdbc.password=vprodbpass     # should match in our DB Dockrfile - ENV MYSQL_ROOT_PASSWORD="vprodbpass"                
+#Memcached Configuration For Active and StandBy Host
+#For Active Host
+memcached.active.host=vprocache01
+memcached.active.port=11211
+#For StandBy Host
+memcached.standBy.host=vprocache02
+memcached.standBy.port=11211                    
+#RabbitMq Configuration
+rabbitmq.address=vpromq01
+rabbitmq.port=15672
+rabbitmq.username=guest
+rabbitmq.password=guest                    
+#Elasticesearch Configuration
+elasticsearch.host =vprosearch01
+elasticsearch.port =9300
+elasticsearch.cluster=vprofile
+elasticsearch.node=vprofilenode
+          
+C. BUILD our artifact
+          - In the projcet directory
+          - run: # mvn install
+          - we should have target directory on our project directory and inside it is our artifact which in thgis demo is vprofile-v2.war
+          - we need to copy the target directory iin our APP directory file.
+                    - cp -r target /Volumes/T7/DEVOPS/skillsdev/projects/containerization/demo01/app
+                              - we ccan remove everything except for the artifact if wee want
+                    - cd into APP directory and build our dockr images
+                              - we need our dockerhub to put this image we are building - in this deemo we are using "fculibao/inanapp" from https://hub.docker.com/repository/docker/fculibao/inanapp/general
+                              - Build customized APP docker image.
+                                        # docker build -t fculibao/inanapp:V1 .
+                                        - check docker image
+                                        # ╰─➤  docker images | grep fculibao 
+                                          fculibao/inanapp                     V1                                                      c5ddba48f6d4   35 minutes ago   319MB
+
+                              - Build customized DB Docker image.
+                                        # docker build -t fculibao/inandb:V1 .
+                                        - check docker image
+                                        # ╰─➤  docker images | grep inandb
+                                          fculibao/inandb                      V1                                                      16a4ba79df9c   32 seconds ago   372MB
+
+                              - BUild customized WEB Docker image.
+                                        # docker build -t fculibao/inanweb:V1 .
+                                        - check docker image
+                                        # ╰─➤  docker images | grep inandb
+                                          fculibao/inandb                      V1                                                      16a4ba79df9c   32 seconds ago   372MB
+
+                              - RabbitMQ and Memcache - we dont need any customazation we just simply need to pull them
+                                        # docker pull nginx
+                                        # docker pull memcached
+                                        # docker pull rabbitmq
+
+D. DOCKER COMPOSE - To test our application cluster
+          - Install docker-compose if not yet available.
+          URL - https://docs.docker.com/compose/install/other/
+                    - Linux :
+                              # curl -SL https://github.com/docker/compose/releases/download/v2.14.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+                              - Test the installation
+
+                              # docker-compose version
+                    
+                    - Windows :
+                              # [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+                              # Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/v2.14.2/docker-compose-Windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
+          
+          - Build a docker compose
+
+
+
+
+
+

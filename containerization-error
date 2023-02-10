@@ -1,0 +1,130 @@
+ERROR:
+
+SimpleMessageListenerContainer#1149 Failed to check/redeclare auto-delete queue
+
+
+app01_1  |  at java.base/java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:na]
+
+app01_1  |  at java.base/java.net.AbstractPlainSocketImpl.doConnect(Unknown Source) ~[na:na]
+
+app01_1  |  at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source) ~[na:na]
+
+app01_1  |  at java.base/java.net.AbstractPlainSocketImpl.connect(Unknown Source) ~[na:na]
+
+app01_1  |  at java.base/java.net.SocksSocketImpl.connect(Unknown Source) ~[na:na]
+
+app01_1  |  at java.base/java.net.Socket.connect(Unknown Source) ~[na:na]
+
+app01_1  |  at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:50) ~[amqp-client-4.0.2.jar:4.0.2]
+
+app01_1  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:907) ~[amqp-client-4.0.2.jar:4.0.2]
+
+app01_1  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:859) ~[amqp-client-4.0.2.jar:4.0.2]
+
+app01_1  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1000) ~[amqp-client-4.0.2.jar:4.0.2]
+
+app01_1  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:355) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  ... 9 common frames omitted
+
+app01_1  | 15:16:22.035 [SimpleAsyncTaskExecutor-249] WARN  o.s.a.r.l.SimpleMessageListenerContainer#1568 Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused (Connection refused)
+
+app01_1  | 15:16:22.035 [SimpleAsyncTaskExecutor-249] INFO  o.s.a.r.l.SimpleMessageListenerContainer#1554 Restarting Consumer@1be347ce: tags=[{}], channel=null, acknowledgeMode=AUTO local queue size=0
+
+app01_1  | 15:16:22.037 [SimpleAsyncTaskExecutor-252] ERROR o.s.a.r.l.SimpleMessageListenerContainer#1149 Failed to check/redeclare auto-delete queue(s).
+
+app01_1  | org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused (Connection refused)
+
+app01_1  |  at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:62) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:367) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:565) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:1430) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:1411) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:1387) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:336) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.redeclareElementsIfNecessary(SimpleMessageListenerContainer.java:1135) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.access$1200(SimpleMessageListenerContainer.java:96) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1380) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+app01_1  | Caused by: java.net.ConnectException: Connection refused (Connection refused)
+
+app01_1  |  at java.base/java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:na]
+
+app01_1  |  at java.base/java.net.AbstractPlainSocketImpl.doConnect(Unknown Source) ~[na:na]
+
+app01_1  |  at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source) ~[na:na]
+
+app01_1  |  at java.base/java.net.AbstractPlainSocketImpl.connect(Unknown Source) ~[na:na]
+
+app01_1  |  at java.base/java.net.SocksSocketImpl.connect(Unknown Source) ~[na:na]
+
+app01_1  |  at java.base/java.net.Socket.connect(Unknown Source) ~[na:na]
+
+app01_1  |  at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:50) ~[amqp-client-4.0.2.jar:4.0.2]
+
+app01_1  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:907) ~[amqp-client-4.0.2.jar:4.0.2]
+
+app01_1  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:859) ~[amqp-client-4.0.2.jar:4.0.2]
+
+app01_1  |  at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1000) ~[amqp-client-4.0.2.jar:4.0.2]
+
+app01_1  |  at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:355) ~[spring-rabbit-1.7.1.RELEASE.jar:na]
+
+app01_1  |  ... 9 common frames omitted
+
+app01_1  | 15:16:26.936 [SimpleAsyncTaskExecutor-250] WARN  o.s.a.r.l.SimpleMessageListenerContainer#1568 Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused (Connection refused)
+
+app01_1  |
+
+
+
+SOLUTION: 
+
+USE OPENJDK-8
+
+CHECK -NOTES FOR MAVEN AND OPENJDK(JAVA)
+
+
+************************************************************************************************************************************************************************************************************************************
+
+ERROR:
+2023-01-07T22:38:16.903820Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.25'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+2023-01-07T22:38:26.126969Z 2 [Note] Access denied for user 'admin'@'172.23.0.6' (using password: YES)
+2023-01-07T22:39:36.351023Z 3 [Note] Access denied for user 'admin'@'172.23.0.6' (using password: YES)
+2023-01-07T22:40:16.869891Z 4 [Note] Access denied for user 'admin'@'172.23.0.6' (using password: YES)
+2023-01-07T22:43:30.415113Z 6 [Note] Access denied for user 'admin'@'172.23.0.6' (using password: YES)
+
+
+
+SOLUTION:
+Step 1: access MySQL through docker container
+docker exec -it <CONTAINER_ID>  mysql -uroot -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 360
+Server version: 8.0.21 MySQL Community Server - GPL
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql>
+Step 2:
+mysql>  CREATE USER 'admin'@'172.25.0.3' IDENTIFIED BY 'admin123';   >>>> LOOK FOR ERROR LOGS TO SEE WHAT IP WE NED IT TO SET >>>>> account we set in application.propereties [ jdbc.username=admin - jdbc.password=admin123 ]
+Step 3:
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'172.25.0.3' WITH GRANT OPTION;
+Step 4 :
+mysql> FLUSH PRIVILEGES; 
+mysql> exit
